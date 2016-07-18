@@ -1,0 +1,38 @@
+<h1>Listing Products</h1>
+ <%= link_to 'New product', new_product_path %>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Manufacturer</th>
+    <th>Categories</th>
+    <th>Actions</th>
+  </tr>
+ 
+  <% @products.each do |product| %>
+    <tr>
+      <td><%= product.id %></td>
+      <td><%= product.name %></td>
+      <td><%= product.description %></td>
+      <td><%= product.price %></td>
+      <td>
+        <% if product.manufacturer != nil %>
+        <%= product.manufacturer.name %>
+        <% end %>
+      </td>
+      <td>
+        <% if product.categories != nil %>
+            <ul>
+            <% product.categories.each do |category| %>
+              <li><%= category.name %></li>
+            <% end %>
+            </ul>
+        <% end %>
+      </td>
+      <td></td>
+    </tr>
+  <% end %>
+</table>
+

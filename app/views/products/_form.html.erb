@@ -1,0 +1,44 @@
+<%= form_for :product, url: products_path do |f| %>
+	<% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@product.errors.count, "error") %> prohibited
+        this product from being saved:
+      </h2>
+      <ul>
+        <% @product.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+ 
+  <p>
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </p>
+ 
+  <p>
+    <%= f.label :price %><br>
+    <%= f.text_field :price %>
+  </p>
+ 
+  <p>
+    Manufacturer:<br>
+    <%= f.collection_select(:manufacturer_id, @manufacturers, :id, :name, { :prompt => 'Select a Manufacturer', :selected => @product.manufacturer_id }) %>
+  </p>
+ 
+  <p>
+    Categories:<br>
+    <%= f.collection_check_boxes(:categories, @categories, :id, :name) %>
+  </p>
+
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
